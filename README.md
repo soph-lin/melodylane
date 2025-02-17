@@ -1,4 +1,4 @@
-# Skip
+# Melody Lane 🎶
 ## About
 A music-based time capsule developed using the Spotify API. Coded with React with Next.js framework, Typescript, and Tailwind CSS.
 * Discover how your music tastes change over time
