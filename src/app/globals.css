@@ -3,19 +3,158 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f5f2eb;
+  --foreground: #2c2420;
+  --accent: #9b8d83;
+  --accent-glow: #766b63;
+  --card: rgba(251, 248, 244, 0.8);
+  --shadow: rgba(44, 36, 32, 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #2c2420;
+    --foreground: #f5f2eb;
+    --card: rgba(44, 36, 32, 0.8);
   }
+}
+
+@keyframes blob1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+
+@keyframes blob2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-40px, 20px) scale(0.9); }
+  66% { transform: translate(20px, -30px) scale(1.1); }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
+  position: relative;
+  min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  width: 60vmax;
+  height: 60vmax;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.15;
+  z-index: -1;
+}
+
+body::before {
+  top: -20%;
+  right: -20%;
+  animation: blob1 20s ease-in-out infinite;
+}
+
+body::after {
+  bottom: -20%;
+  left: -20%;
+  animation: blob2 25s ease-in-out infinite;
+}
+
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+@layer utilities {
+  .glow {
+    text-shadow: 0 0 15px var(--accent-glow);
+  }
+  
+  .card-glow {
+    box-shadow: 0 4px 20px var(--shadow);
+  }
+
+  .scrollbar-custom {
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) transparent;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background-color: var(--accent);
+    border-radius: 999px;
+  }
+
+  /* Remove arrows/spinners */
+  .scrollbar-custom::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  /* For Firefox */
+  .scrollbar-custom {
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) transparent;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
+}
+
+/* Custom Scrollbar - Webkit */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  display: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--foreground);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--foreground) transparent;
+}
+
+/* Hide scrollbar buttons in Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--foreground) transparent;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--foreground) transparent;
+  }
 }
