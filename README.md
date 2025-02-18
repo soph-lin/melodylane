@@ -1,6 +1,6 @@
 # Melody Lane 🎶
 ## About
-A music-based time capsule developed using the Spotify API. Coded with React with Next.js framework, Typescript, and Tailwind CSS.
+A music-based time capsule developed using the Spotify API. Coded with React with Next.js framework, Typescript, and Tailwind CSS. Migrated from legacy code, [spotistats]([url](https://github.com/soph-lin/sophli/tree/main/spotistats)).
 * Discover how your music tastes change over time
 * Animated cloud and timeline display
 * Cute icons while you're waiting for the time capsule to process
